@@ -24,6 +24,8 @@ class TemplatesController < ApplicationController
     submissions = submissions.preload(:template_accesses) unless current_user.role.in?(%w[admin superadmin])
 
     @pagy, @submissions = pagy(submissions.preload(submitters: :start_form_submission_events))
+    # Only show submissions by the user that created it
+    @submissions = @submissions.where(created_by_user_id: current_user.id)
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end

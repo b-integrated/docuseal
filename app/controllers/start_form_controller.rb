@@ -93,6 +93,7 @@ class StartFormController < ApplicationController
 
     submitter.submission ||= Submission.new(template:,
                                             account_id: template.account_id,
+                                            created_by_user_id: current_user.id,
                                             template_submitters: template.submitters,
                                             submitters: [submitter],
                                             source: :link)

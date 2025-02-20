@@ -58,7 +58,6 @@ class Submission < ApplicationRecord
   has_many_attached :preview_documents
 
   has_many :template_accesses, primary_key: :template_id, foreign_key: :template_id, dependent: nil, inverse_of: false
-
   has_many :template_schema_documents,
            ->(e) { where(uuid: (e.template_schema.presence || e.template.schema).pluck('attachment_uuid')) },
            through: :template, source: :documents_attachments
@@ -101,4 +100,5 @@ class Submission < ApplicationRecord
 
     ActiveStorage::Blob.proxy_url(combined_document.blob)
   end
+
 end

@@ -18,6 +18,7 @@ module Submissions
         set_submission_preferences['send_email'] = true if params['send_completed_email']
 
         submission = template.submissions.new(created_by_user: user, source:,
+          created_by_user_id: user.id,
                                               account_id: user.account_id,
                                               preferences: set_submission_preferences,
                                               expire_at: attrs[:expire_at],
